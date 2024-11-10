@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MyProject.Application.Common.Interfaces;
 using MyProject.Application.HomeChores;
+using MyProject.Application.HomeChores.Dto;
 using MyProject.Domain.Entities;
 
 namespace MyProject.Infrastructure.Repositories;
@@ -14,7 +15,7 @@ public class HomeChoreRepository : IHomeChoreRepository
         _db = context;
     }
 
-    public async Task<IList<HomeChoreDto>> GetAllAsync(CancellationToken cancellationToken)
+    public async Task<IList<HomeChoreDto>> GetAll(CancellationToken cancellationToken)
     {
         return await _db.HomeChores
             .Select(h => new HomeChoreDto
@@ -28,7 +29,7 @@ public class HomeChoreRepository : IHomeChoreRepository
             .ToListAsync(cancellationToken);
     }
 
-    public async Task<HomeChoreDto?> GetByIdAsync(int id, CancellationToken cancellationToken)
+    public async Task<HomeChoreDto?> GetById(int id, CancellationToken cancellationToken)
     {
         var homeChore = await _db.HomeChores.FindAsync(id, cancellationToken);
         if (homeChore == null)
@@ -46,7 +47,7 @@ public class HomeChoreRepository : IHomeChoreRepository
         };
     }
 
-    public async Task AddAsync(HomeChoreDto homeChoreDto, CancellationToken cancellationToken)
+    public async Task Create(HomeChoreCreateDto homeChoreDto, CancellationToken cancellationToken)
     {
         var homeChore = new HomeChore
         {
