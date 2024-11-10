@@ -4,9 +4,16 @@ namespace MyProject.Application.HomeChores;
 
 public interface IHomeChoreRepository
 {
-    Task<IList<HomeChore>> GetAllAsync();
-    Task<HomeChore> GetByIdAsync(int id);
-    Task AddAsync(HomeChore homeChore);
-    Task UpdateAsync(HomeChore homeChore);
-    Task DeleteAsync(int id);
+    Task<IList<HomeChoreDto>> GetAllAsync(CancellationToken cancellationToken);
+    Task<HomeChoreDto?> GetByIdAsync(int id, CancellationToken cancellationToken);
+    Task AddAsync(HomeChoreDto homeChore, CancellationToken cancellationToken);
+}
+
+public class HomeChoreDto
+{
+    public int Id { get; set; }
+    public required string Name { get; set; }
+    public string? Description { get; set; }
+    public DateTime DueDate { get; set; }
+    public bool IsCompleted { get; set; }
 }

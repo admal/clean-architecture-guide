@@ -59,32 +59,4 @@ public class HomeChoreRepository : IHomeChoreRepository
         _db.HomeChores.Add(homeChore);
         await _db.SaveChangesAsync(cancellationToken);
     }
-
-    public async Task UpdateAsync(HomeChoreDto homeChoreDto, CancellationToken cancellationToken)
-    {
-        var homeChore = await _db.HomeChores.FindAsync(homeChoreDto.Id, cancellationToken);
-        if (homeChore == null)
-        {
-            return;
-        }
-
-        homeChore.Name = homeChoreDto.Name;
-        homeChore.Description = homeChoreDto.Description;
-        homeChore.DueDate = homeChoreDto.DueDate;
-        homeChore.IsComplete = homeChoreDto.IsCompleted;
-
-        await _db.SaveChangesAsync(cancellationToken);
-    }
-
-    public async Task DeleteAsync(int id, CancellationToken cancellationToken)
-    {
-        var homeChore = await _db.HomeChores.FindAsync(id, cancellationToken);
-        if (homeChore == null)
-        {
-            return;
-        }
-
-        _db.HomeChores.Remove(homeChore);
-        await _db.SaveChangesAsync(cancellationToken);
-    }
 }
