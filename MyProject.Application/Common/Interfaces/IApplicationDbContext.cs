@@ -6,4 +6,5 @@ namespace MyProject.Application.Common.Interfaces;
 public interface IApplicationDbContext
 {
     DbSet<HomeChore> HomeChores { get; }
+    Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }
