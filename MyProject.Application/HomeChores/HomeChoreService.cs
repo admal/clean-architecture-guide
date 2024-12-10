@@ -28,7 +28,7 @@ public class HomeChoreService : IHomeChoreService
 
     public async Task<ServiceResult> Create(HomeChoreCreateDto homeChore, CancellationToken cancellationToken)
     {
-        if (homeChore.DueDate >= DateTime.Now)
+        if (homeChore.DueDate < DateTime.Now)
         {
             return ServiceResult.ForError("Due date must be in the future.");
         }
